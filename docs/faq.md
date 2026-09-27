@@ -1,5 +1,9 @@
 # FAQ
 
+## Where are logos and social images?
+
+In the public **[brand kit](../brand/README.md)** — hero, social 1×1 / 9×16, store frames, SVG mark and wordmarks.
+
 ## Is Arya 900 open source?
 
 No. The product is **proprietary**. This repository publishes downloads and legal text only. See [LICENSE](../LICENSE) and the [EULA](../legal/EULA.en.md).
