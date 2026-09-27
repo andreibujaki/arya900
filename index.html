@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arya 900 Local Assistant — Private AI on your PC</title>
+  <meta name="description" content="Offline Windows desktop chat with local GGUF models. Free for personal light use." />
+  <meta property="og:title" content="Arya 900 Local Assistant" />
+  <meta property="og:description" content="Private AI on your PC — offline local GGUF chat for Windows." />
+  <meta property="og:image" content="assets/og.png" />
+  <link rel="icon" href="assets/icon.png" type="image/png" />
+  <style>
+    :root {
+      --navy: #0B1F3A;
+      --navy-dark: #061223;
+      --ink: #0B1F3A;
+      --light: #F5F7FA;
+      --soft: #E6EAF0;
+      --muted: #8a9bb0;
+      --white: #ffffff;
+      --accent: #3b82f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--navy-dark);
+      color: var(--light);
+      line-height: 1.5;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1080px, 92vw); margin: 0 auto; }
+
+    /* Nav */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(6, 18, 35, 0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; gap: 16px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; font-weight: 600; letter-spacing: 0.02em;
+    }
+    .brand img { width: 36px; height: 36px; border-radius: 50%; }
+    .nav-links { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted); font-size: 0.92rem;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      text-decoration: none; border-radius: 999px; font-weight: 600;
+      padding: 12px 22px; font-size: 0.95rem;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,0.18);
+      background: transparent; color: var(--light);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 56px 0 40px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 36px; }
+    }
+    .eyebrow {
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.12em; font-size: 0.72rem; margin-bottom: 14px;
+    }
+    h1 {
+      font-family: Cambria, Georgia, "Times New Roman", serif;
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      line-height: 1.12; font-weight: 700; margin-bottom: 16px;
+    }
+    .lede {
+      color: #c5d0de; font-size: 1.08rem; max-width: 36ch; margin-bottom: 28px;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+    .note { color: var(--muted); font-size: 0.82rem; max-width: 42ch; }
+    .hero-visual {
+      border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+    }
+    .hero-visual img { display: block; width: 100%; height: auto; }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    section.alt { background: rgba(255,255,255,0.02); }
+    h2 {
+      font-family: Cambria, Georgia, serif;
+      font-size: 1.75rem; margin-bottom: 10px;
+    }
+    .section-lead { color: var(--muted); margin-bottom: 28px; max-width: 48ch; }
+
+    .features {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    }
+    @media (max-width: 860px) {
+      .features { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: rgba(11, 31, 58, 0.65);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; overflow: hidden;
+    }
+    .card img { width: 100%; display: block; aspect-ratio: 16/10; object-fit: cover; }
+    .card-body { padding: 16px 16px 18px; }
+    .card-body h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .card-body p { color: var(--muted); font-size: 0.9rem; }
+
+    .plans {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    @media (max-width: 860px) {
+      .plans { grid-template-columns: 1fr; }
+    }
+    .plan {
+      padding: 22px; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(11, 31, 58, 0.5);
+    }
+    .plan.featured {
+      border-color: rgba(59,130,246,0.55);
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.2);
+    }
+    .plan .tag {
+      display: inline-block; font-size: 0.72rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .plan h3 { margin-bottom: 8px; }
+    .plan p { color: var(--muted); font-size: 0.92rem; }
+
+    .footer {
+      padding: 36px 0 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted); font-size: 0.85rem;
+    }
+    .footer-row {
+      display: flex; flex-wrap: wrap; gap: 16px 28px;
+      justify-content: space-between; align-items: start;
+    }
+    .footer a { color: #b7c5d8; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+    .footer nav { display: flex; flex-wrap: wrap; gap: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="./">
+        <img src="assets/icon.png" alt="" width="36" height="36" />
+        <span>Arya 900</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Product</a>
+        <a href="#plans">Plans</a>
+        <a href="legal/EULA.en.md">Legal</a>
+        <a class="btn btn-primary" href="https://github.com/andreibujaki/arya900/releases/latest">Download Free</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <p class="eyebrow">Local Assistant · Windows</p>
+        <h1>Private AI on your PC</h1>
+        <p class="lede">
+          Offline desktop chat with local GGUF models. Free for personal light use —
+          no cloud required for everyday chat.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://github.com/andreibujaki/arya900/releases/latest">Download Free for Windows</a>
+          <a class="btn btn-ghost" href="#features">See what’s included</a>
+        </div>
+        <p class="note">Windows 10/11 x64. Current build is unsigned — SmartScreen may ask you to confirm.</p>
+      </div>
+      <div class="hero-visual">
+        <img src="assets/hero.png" alt="Arya 900 Local Assistant" width="960" height="540" />
+      </div>
+    </div>
+
+    <section class="alt" id="features">
+      <div class="wrap">
+        <h2>Built for your machine</h2>
+        <p class="section-lead">Chat locally. Keep prompts and history on your PC with the Free experience.</p>
+        <div class="features">
+          <article class="card">
+            <img src="assets/feature-chat.png" alt="" />
+            <div class="card-body">
+              <h3>Local chat</h3>
+              <p>Talk to GGUF models that run on your computer.</p>
+            </div>
+          </article>
+          <article class="card">
+            <img src="assets/feature-knowledge.png" alt="" />
+            <div class="card-body">
+              <h3>Knowledge (Pro later)</h3>
+              <p>Folder-grounded tools unlock when Pro goes public.</p>
+            </div>
+          </article>
+          <article class="card">
+            <img src="assets/feature-language.png" alt="" />
+            <div class="card-body">
+              <h3>Multilingual UI</h3>
+              <p>Use the app in your language; legal docs in EN and RO.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans">
+      <div class="wrap">
+        <h2>Plans</h2>
+        <p class="section-lead">Start Free today. Paid tiers come later.</p>
+        <div class="plans">
+          <div class="plan featured">
+            <span class="tag">Available now</span>
+            <h3>Free</h3>
+            <p>Personal, non-commercial light use. Local chat on Windows.</p>
+          </div>
+          <div class="plan">
+            <span class="tag">Coming later</span>
+            <h3>Pro</h3>
+            <p>Knowledge folder and file tools for power users.</p>
+          </div>
+          <div class="plan">
+            <span class="tag">Coming later</span>
+            <h3>Business</h3>
+            <p>Organizational use and Project edition when ready.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <div>
+        <strong style="color:#d7e0ec">Arya 900 Local Assistant</strong><br />
+        © EAROCO SERVICES SRL - ANDREI BUJAKI<br />
+        Proprietary software — not open source.
+      </div>
+      <nav>
+        <a href="https://github.com/andreibujaki/arya900/releases/latest">Download</a>
+        <a href="docs/install.md">Install help</a>
+        <a href="docs/faq.md">FAQ</a>
+        <a href="legal/EULA.en.md">EULA</a>
+        <a href="legal/PRIVACY.en.md">Privacy</a>
+        <a href="https://github.com/andreibujaki/arya900">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
