@@ -9,13 +9,13 @@
 </p>
 
 <p align="center">
-  <a href="https://andreibujaki.github.io/arya900/"><strong>Product site</strong></a>
+  <a href="https://andreibujaki.github.io/arya900/"><strong>Product website</strong></a>
   ·
   <a href="https://github.com/andreibujaki/arya900/releases/latest"><strong>Download Free (Windows)</strong></a>
 </p>
 
----
+Full site sections: Features · Use cases · How it works · Privacy · Requirements · Pricing · Compare · FAQ · About · Download
 
-Windows 10/11 · x64 · Free for personal light use · [Install help](docs/install.md) · [FAQ](docs/faq.md) · [Legal](legal/EULA.en.md)
+Windows 10/11 · x64 · Free for personal light use · [Install](docs/install.md) · [FAQ](docs/faq.md) · [Legal](legal/EULA.en.md)
 
-Publisher: **EAROCO SERVICES SRL - ANDREI BUJAKI** · Proprietary (source not published here)
+Publisher: **EAROCO SERVICES SRL - ANDREI BUJAKI** · Proprietary (app source not published here)
