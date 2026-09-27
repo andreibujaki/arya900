@@ -7,7 +7,7 @@
   <meta name="description" content="Offline Windows desktop chat with local GGUF models. Free for personal light use." />
   <meta property="og:title" content="Arya 900 Local Assistant" />
   <meta property="og:description" content="Private AI on your PC — offline local GGUF chat for Windows." />
-  <meta property="og:image" content="assets/splash.png" />
+  <meta property="og:image" content="assets/og.png" />
   <link rel="icon" href="assets/icon.png" type="image/png" />
   <style>
     :root {
@@ -71,19 +71,33 @@
     .btn-ghost:hover { background: var(--soft); }
     .btn-sm { padding: 7px 12px; font-size: 0.82rem; }
 
-    /* HERO = splash composition */
+    /* HERO = splash lockup on page field (not a floating card) */
     .hero {
       background: var(--bg);
       text-align: center;
-      padding: 64px 0 48px;
+      padding: 48px 0 40px;
       border-bottom: 1px solid var(--line);
     }
     .hero-splash {
-      width: min(560px, 92vw);
-      margin: 0 auto 28px;
+      width: min(720px, 94vw);
+      max-height: min(52vh, 420px);
+      margin: 0 auto 24px;
+      object-fit: contain;
       border-radius: 0;
       box-shadow: none;
       background: transparent;
+    }
+    .card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+      background: #F5F7FA;
     }
     .cta-row {
       display: flex; flex-wrap: wrap; gap: 10px;
@@ -120,8 +134,6 @@
       border: 1px solid var(--line);
       border-radius: 12px;
     }
-    .card { overflow: hidden; }
-    .card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: #F5F7FA; }
     .card-body, .tile, .plan { padding: 16px; }
     .card-body h3, .tile h3, .step h3, .plan h3 {
       font-size: 1.02rem; margin-bottom: 6px; color: var(--ink);
@@ -238,7 +250,7 @@
     <!-- Exact splash look -->
     <section class="hero" id="top">
       <div class="wrap">
-        <img class="hero-splash" src="assets/splash.png" width="420" height="420" alt="Arya 900 Local Assistant — Private AI on your PC" />
+        <img class="hero-splash" src="assets/hero.png" width="720" height="405" alt="Arya 900 Local Assistant — Private AI on your PC" />
         <div class="cta-row">
           <a class="btn btn-primary" href="https://github.com/andreibujaki/arya900/releases/latest">Download Free for Windows</a>
           <a class="btn btn-ghost" href="#how">See how it works</a>
