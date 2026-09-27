@@ -71,22 +71,23 @@
     .btn-ghost:hover { background: var(--soft); }
     .btn-sm { padding: 7px 12px; font-size: 0.82rem; }
 
-    /* HERO = real app shot + brand (not empty splash tile) */
+    /* HERO = splash lockup (brand card), not a chat screenshot */
     .hero {
       background: var(--bg);
       text-align: center;
-      padding: 36px 0 36px;
+      padding: 48px 0 40px;
       border-bottom: 1px solid var(--line);
     }
     .hero-splash {
-      width: min(920px, 94vw);
-      margin: 0 auto 22px;
-      object-fit: cover;
-      aspect-ratio: 16 / 9;
-      border-radius: 10px;
-      border: 1px solid var(--line);
-      box-shadow: 0 8px 28px rgba(11, 31, 58, 0.08);
-      background: #F5F7FA;
+      width: min(560px, 92vw);
+      margin: 0 auto 24px;
+      object-fit: contain;
+      aspect-ratio: auto;
+      max-height: min(48vh, 380px);
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      background: transparent;
     }
     .card {
       overflow: hidden;
@@ -284,7 +285,7 @@
     <!-- Exact splash look -->
     <section class="hero" id="top">
       <div class="wrap">
-        <img class="hero-splash" src="assets/hero.png" width="920" height="518" alt="Arya 900 Local Assistant on Windows — Private AI on your PC" />
+        <img class="hero-splash" src="assets/splash.png" width="560" height="336" alt="Arya 900 Local Assistant — Private AI on your PC" />
         <div class="cta-row">
           <a class="btn btn-primary" href="https://github.com/andreibujaki/arya900/releases/latest">Download Free for Windows</a>
           <a class="btn btn-ghost" href="#how">See how it works</a>
