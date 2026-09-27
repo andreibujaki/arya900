@@ -1,8 +1,8 @@
 # FAQ
 
-## Where are logos and social images?
+## Where can I see the product page?
 
-In the public **[brand kit](../brand/README.md)** — hero, social 1×1 / 9×16, store frames, SVG mark and wordmarks.
+https://andreibujaki.github.io/arya900/
 
 ## Is Arya 900 open source?
 
