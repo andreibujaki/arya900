@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Download Free
+    url: https://github.com/andreibujaki/arya900/releases/latest
+    about: Get the Free Windows installer from Releases (not Issues).
+  - name: Legal documents
+    url: https://github.com/andreibujaki/arya900/tree/main/legal
+    about: EULA, Privacy, and Subscription terms (EN/RO).
