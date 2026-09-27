@@ -127,6 +127,107 @@
       max-width: 46ch; margin: 0 auto 24px; font-size: 0.98rem;
     }
 
+    .guides {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 420px;
+      text-align: left;
+    }
+    .guides-nav {
+      border-right: 1px solid var(--line);
+      background: #fafbfc;
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .guides-nav button {
+      display: block; width: 100%;
+      text-align: left;
+      border: none; background: transparent;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font: inherit; font-size: 0.88rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .guides-nav button:hover { background: var(--soft); color: var(--ink); }
+    .guides-nav button.active {
+      background: var(--ink);
+      color: #fff;
+      font-weight: 600;
+    }
+    .guides-pane { display: none; padding: 22px 24px 28px; }
+    .guides-pane.active { display: block; }
+    .guides-pane h3 {
+      font-family: Cambria, Georgia, "Times New Roman", serif;
+      font-size: 1.25rem; margin-bottom: 8px; color: var(--ink);
+      text-align: left;
+    }
+    .guides-pane .intro {
+      color: var(--muted); font-size: 0.92rem; margin-bottom: 16px;
+    }
+    .guides-pane ol {
+      margin: 0 0 18px 1.2rem; font-size: 0.92rem; color: var(--ink);
+    }
+    .guides-pane li { margin-bottom: 8px; color: var(--muted); }
+    .guides-pane li strong { color: var(--ink); font-weight: 650; }
+    .guide-shots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .guide-shots.one { grid-template-columns: 1fr; max-width: 520px; }
+    .guide-shot {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #F5F7FA;
+      margin: 0;
+    }
+    .guide-shot img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .guide-shot figcaption {
+      padding: 8px 10px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+    .guide-tip {
+      background: #eef6ff;
+      border: 1px solid #d0e2f5;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+    .guide-tip strong {
+      display: block; margin-bottom: 4px;
+      font-size: 0.8rem; color: var(--ink);
+    }
+    @media (max-width: 720px) {
+      .guides { grid-template-columns: 1fr; }
+      .guides-nav {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px;
+      }
+      .guides-nav button { white-space: nowrap; width: auto; }
+      .guide-shots { grid-template-columns: 1fr; }
+    }
+
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
@@ -338,26 +439,152 @@
     <section class="band" id="features">
       <div class="wrap">
         <h2>Product features</h2>
-        <p class="section-lead">Local assistant chat on Windows — without sending Free chats to a cloud AI API.</p>
-        <div class="grid-3" style="margin-bottom:14px">
-          <article class="card">
-            <img src="assets/feature-chat.png" alt="" />
-            <div class="card-body"><h3>Local chat</h3><p>Talk to GGUF models that run on your computer.</p></div>
+        <p class="section-lead">How to use Arya 900 on your PC — pick a topic, follow the steps.</p>
+        <div class="guides" id="feature-guides">
+          <nav class="guides-nav" aria-label="Feature guides">
+            <button type="button" data-feature="models" class="active">Models</button>
+            <button type="button" data-feature="chat">Local chat</button>
+            <button type="button" data-feature="sessions">Sessions</button>
+            <button type="button" data-feature="language">Language &amp; theme</button>
+            <button type="button" data-feature="knowledge">Knowledge base</button>
+            <button type="button" data-feature="settings">Settings</button>
+            <button type="button" data-feature="plans">Free vs Pro</button>
+          </nav>
+
+          <article class="guides-pane active" id="feature-models" data-feature="models">
+            <h3>Models</h3>
+            <p class="intro">Download a catalog model, load one already on this PC, or pick another .gguf file. Release frees GPU memory when you switch.</p>
+            <ol>
+              <li>Open <strong>Models</strong> from the model name in the top bar.</li>
+              <li>In <strong>Catalog</strong>, download a model that fits your VRAM — or use <strong>On this PC</strong>.</li>
+              <li>Click <strong>Load</strong>. Oversized models show a warning first.</li>
+              <li>Optional: <strong>Choose another .gguf file…</strong> to browse locally.</li>
+              <li>Use <strong>Release model</strong> before loading a different one if memory is tight.</li>
+            </ol>
+            <div class="guide-shots">
+              <figure class="guide-shot">
+                <img src="assets/guide-models-01.png" alt="Models dialog showing Loaded, On this PC, and Catalog" />
+                <figcaption>Models — Loaded, On this PC, Catalog</figcaption>
+              </figure>
+              <figure class="guide-shot">
+                <img src="assets/guide-models-02.png" alt="Catalog download or Load button" />
+                <figcaption>Download or Load from Catalog</figcaption>
+              </figure>
+            </div>
+            <div class="guide-tip"><strong>Tip</strong>Downloads can be resumed if paused. Release frees GPU memory before you switch models.</div>
           </article>
-          <article class="card">
-            <img src="assets/feature-knowledge.png" alt="" />
-            <div class="card-body"><h3>Knowledge tools</h3><p>Folder-grounded workflows unlock with Pro (coming later).</p></div>
+
+          <article class="guides-pane" id="feature-chat" data-feature="chat">
+            <h3>Local chat</h3>
+            <p class="intro">Talk to a GGUF model that runs on your computer — Free chat is designed for on-device use.</p>
+            <ol>
+              <li>Load a model first (see <a href="#feature-models" data-feature="models">Models</a>).</li>
+              <li>Open or start a chat from the top actions.</li>
+              <li>Type in the composer and send.</li>
+              <li>Wait for the local reply — no cloud AI API for Free chats.</li>
+            </ol>
+            <div class="guide-shots">
+              <figure class="guide-shot">
+                <img src="assets/guide-chat-01.png" alt="Arya 900 local chat window" />
+                <figcaption>Main chat — Arya Light</figcaption>
+              </figure>
+              <figure class="guide-shot">
+                <img src="assets/guide-chat-02.png" alt="Chat composer and conversation" />
+                <figcaption>Composer and conversation</figcaption>
+              </figure>
+            </div>
+            <div class="guide-tip"><strong>Tip</strong>Smaller models (like Gemma 2 2B Q4) fit low VRAM; larger ones need more memory and may warn before load.</div>
           </article>
-          <article class="card">
-            <img src="assets/feature-language.png" alt="" />
-            <div class="card-body"><h3>Multilingual UI</h3><p>App UI in your language; legal docs in English and Romanian.</p></div>
+
+          <article class="guides-pane" id="feature-sessions" data-feature="sessions">
+            <h3>Sessions</h3>
+            <p class="intro">Keep separate conversations with Open, New, and Sessions — without leaving the desktop app.</p>
+            <ol>
+              <li>Click <strong>New</strong> for a fresh conversation.</li>
+              <li>Use <strong>Sessions</strong> to browse or switch past chats.</li>
+              <li>Use <strong>Open</strong> when you need to open an existing session file or entry from the list.</li>
+            </ol>
+            <div class="guide-shots one">
+              <figure class="guide-shot">
+                <img src="assets/guide-sessions-01.png" alt="Open New Sessions controls in the Arya header" />
+                <figcaption>Open / New / Sessions in the header</figcaption>
+              </figure>
+            </div>
+            <div class="guide-tip"><strong>Tip</strong>Start a new session when the topic changes so each thread stays easy to find.</div>
           </article>
-        </div>
-        <div class="grid-4">
-          <div class="tile"><div class="num">01</div><h3>Desktop native</h3><p>Windows installer — not a browser tab.</p></div>
-          <div class="tile"><div class="num">02</div><h3>Model choice</h3><p>Use local GGUF files that fit your hardware.</p></div>
-          <div class="tile"><div class="num">03</div><h3>Free forever*</h3><p>Personal light use under the Free EULA.</p></div>
-          <div class="tile"><div class="num">04</div><h3>Upgrade path</h3><p>Pro and Business when you need more.</p></div>
+
+          <article class="guides-pane" id="feature-language" data-feature="language">
+            <h3>Language &amp; theme</h3>
+            <p class="intro">Match the app UI to your language and choose Arya Light or Arya Dark. Legal documents stay English and Romanian.</p>
+            <ol>
+              <li>Open <strong>Settings</strong> (gear).</li>
+              <li>Open <strong>Appearance</strong> (or Language).</li>
+              <li>Pick your UI language.</li>
+              <li>Set theme to <strong>Arya Light</strong> or <strong>Arya Dark</strong>.</li>
+            </ol>
+            <div class="guide-shots">
+              <figure class="guide-shot">
+                <img src="assets/guide-language-01.png" alt="Language settings in Arya 900" />
+                <figcaption>UI language</figcaption>
+              </figure>
+              <figure class="guide-shot">
+                <img src="assets/guide-language-02.png" alt="Arya Light and Dark theme options" />
+                <figcaption>Arya Light / Dark</figcaption>
+              </figure>
+            </div>
+            <div class="guide-tip"><strong>Tip</strong>UI languages include Romanian, English, Arabic, Hebrew, Chinese, Spanish, and Russian. Legal pages remain EN + RO.</div>
+          </article>
+
+          <article class="guides-pane" id="feature-knowledge" data-feature="knowledge">
+            <h3>Knowledge base</h3>
+            <p class="intro">Folder-grounded file tools use the Knowledge icon. On Free, this path is shown as Pro / coming later.</p>
+            <ol>
+              <li>Find the <strong>Knowledge base</strong> controls in the header (folder / related icons).</li>
+              <li>On Free, follow the in-app note that Knowledge unlocks with Pro.</li>
+              <li>When Pro ships, point Knowledge at a folder for file-grounded workflows.</li>
+            </ol>
+            <div class="guide-shots one">
+              <figure class="guide-shot">
+                <img src="assets/guide-knowledge-01.png" alt="Knowledge settings or Free Knowledge CTA" />
+                <figcaption>Knowledge — Free view / Pro later</figcaption>
+              </figure>
+            </div>
+            <div class="guide-tip"><strong>Tip</strong>Free chat does not require Knowledge. Upgrade later when folder tools ship for Pro.</div>
+          </article>
+
+          <article class="guides-pane" id="feature-settings" data-feature="settings">
+            <h3>Settings</h3>
+            <p class="intro">Tune the assistant beyond chat — appearance, knowledge notes, and license info live under Settings.</p>
+            <ol>
+              <li>Click the <strong>gear</strong> to open Settings.</li>
+              <li>Review Appearance, Knowledge, and License sections as needed.</li>
+              <li>Close Settings to return to chat.</li>
+            </ol>
+            <div class="guide-shots one">
+              <figure class="guide-shot">
+                <img src="assets/guide-settings-01.png" alt="Arya 900 Settings panel" />
+                <figcaption>Settings panel</figcaption>
+              </figure>
+            </div>
+            <div class="guide-tip"><strong>Tip</strong>License / plan status in Settings is the place to confirm Free vs a future Pro unlock.</div>
+          </article>
+
+          <article class="guides-pane" id="feature-plans" data-feature="plans">
+            <h3>Free vs Pro</h3>
+            <p class="intro">Free is for personal light local chat. Pro and Business unlock more when they ship — including Knowledge tools and org use.</p>
+            <ol>
+              <li>Use Free today for local GGUF chat under the Free EULA.</li>
+              <li>Check Settings → License for your current plan.</li>
+              <li>When Pro/Business are available, upgrade from the site or in-app purchase flow.</li>
+            </ol>
+            <div class="guide-shots one">
+              <figure class="guide-shot">
+                <img src="assets/guide-plans-01.png" alt="License or plan information in Settings" />
+                <figcaption>Plan / license area</figcaption>
+              </figure>
+            </div>
+            <div class="guide-tip"><strong>Tip</strong>See Pricing and FAQ on this page for what Free includes now vs what comes later. No Pro UI is faked in these screenshots.</div>
+          </article>
         </div>
       </div>
     </section>
@@ -570,5 +797,58 @@
       </div>
     </div>
   </footer>
+  <script>
+    (function () {
+      var root = document.getElementById("feature-guides");
+      if (!root) return;
+      var buttons = root.querySelectorAll(".guides-nav button[data-feature]");
+      var panes = root.querySelectorAll(".guides-pane[data-feature]");
+      var valid = {};
+      panes.forEach(function (p) { valid[p.getAttribute("data-feature")] = true; });
+
+      function show(id, pushHash) {
+        if (!valid[id]) id = "models";
+        buttons.forEach(function (b) {
+          b.classList.toggle("active", b.getAttribute("data-feature") === id);
+        });
+        panes.forEach(function (p) {
+          p.classList.toggle("active", p.getAttribute("data-feature") === id);
+        });
+        if (pushHash) {
+          var next = "#feature-" + id;
+          if (location.hash !== next) {
+            history.replaceState(null, "", next);
+          }
+        }
+      }
+
+      function fromHash() {
+        var h = (location.hash || "").replace(/^#/, "");
+        if (h === "features" || h === "") {
+          show("models", false);
+          return;
+        }
+        if (h.indexOf("feature-") === 0) {
+          show(h.slice("feature-".length), false);
+          return;
+        }
+        show("models", false);
+      }
+
+      buttons.forEach(function (b) {
+        b.addEventListener("click", function () {
+          show(b.getAttribute("data-feature"), true);
+        });
+      });
+      root.addEventListener("click", function (e) {
+        var t = e.target.closest("a[data-feature]");
+        if (!t) return;
+        e.preventDefault();
+        show(t.getAttribute("data-feature"), true);
+      });
+      window.addEventListener("hashchange", fromHash);
+      fromHash();
+    })();
+  </script>
 </body>
 </html>
