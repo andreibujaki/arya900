@@ -1,8 +1,10 @@
 # Arya 900 Local Assistant
 
-**Offline Windows desktop chat** with local GGUF models.
+**Private AI on your PC** — offline Windows desktop chat with local GGUF models.
 
 Publisher: **EAROCO SERVICES SRL - ANDREI BUJAKI**
+
+![Arya 900 Local Assistant hero](brand/marketing/hero-16x9.png)
 
 ---
 
@@ -12,11 +14,12 @@ Publisher: **EAROCO SERVICES SRL - ANDREI BUJAKI**
 2. [What it is](#what-it-is)
 3. [Plans](#plans)
 4. [Install](#install)
-5. [Requirements](#requirements)
-6. [Docs](#docs)
-7. [Legal](#legal)
-8. [Support](#support)
-9. [About this repository](#about-this-repository)
+5. [Media & social kit](#media--social-kit)
+6. [Requirements](#requirements)
+7. [Docs](#docs)
+8. [Legal](#legal)
+9. [Support](#support)
+10. [About this repository](#about-this-repository)
 
 ---
 
@@ -70,6 +73,27 @@ More detail: [docs/install.md](docs/install.md)
 
 ---
 
+## Media & social kit
+
+Full pack (marks, wordmarks, social sizes, store frames, brand sheet): **[brand/](brand/)**
+
+| Preview | Asset |
+|---------|--------|
+| ![Social 1x1](brand/marketing/social-1x1.png) | [social-1x1.png](brand/marketing/social-1x1.png) |
+| ![Story 9x16](brand/marketing/social-story-9x16.png) | [social-story-9x16.png](brand/marketing/social-story-9x16.png) |
+
+Store frames:
+
+<p>
+  <img src="brand/marketing/store-chat.png" alt="Store — chat" width="260" />
+  <img src="brand/marketing/store-knowledge.png" alt="Store — knowledge" width="260" />
+  <img src="brand/marketing/store-language.png" alt="Store — language" width="260" />
+</p>
+
+Guide: [brand/README.md](brand/README.md)
+
+---
+
 ## Requirements
 
 Summary:
@@ -90,6 +114,7 @@ Full notes: [docs/requirements.md](docs/requirements.md)
 | [Requirements](docs/requirements.md) | System requirements |
 | [FAQ](docs/faq.md) | Frequent questions |
 | [Changelog](docs/changelog.md) | Public release history |
+| [Media & brand kit](brand/README.md) | Logos, social, store art |
 
 ---
 
@@ -118,6 +143,7 @@ Product license notice: [LICENSE](LICENSE) (proprietary — **not** open source)
 This repository is the **public product face**:
 
 - Downloadable **Free** builds (Releases)
-- Marketing docs and legal text
+- Marketing / social media kit
+- Legal text
 
 **Application source code is not published here.**
