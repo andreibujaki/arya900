@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Arya 900 Local Assistant — Private AI on your PC</title>
-  <meta name="description" content="Offline Windows desktop chat with local GGUF models. Free for personal light use." />
+  <meta name="description" content="Offline Windows desktop chat with local GGUF models. Free for personal light use. Pro and Business coming later." />
   <meta property="og:title" content="Arya 900 Local Assistant" />
   <meta property="og:description" content="Private AI on your PC — offline local GGUF chat for Windows." />
   <meta property="og:image" content="assets/og.png" />
@@ -13,12 +13,14 @@
     :root {
       --navy: #0B1F3A;
       --navy-dark: #061223;
-      --ink: #0B1F3A;
       --light: #F5F7FA;
       --soft: #E6EAF0;
       --muted: #8a9bb0;
       --white: #ffffff;
       --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.15);
+      --line: rgba(255, 255, 255, 0.08);
+      --card: rgba(11, 31, 58, 0.72);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -26,180 +28,274 @@
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       background: var(--navy-dark);
       color: var(--light);
-      line-height: 1.5;
+      line-height: 1.55;
     }
+    img { max-width: 100%; display: block; }
     a { color: inherit; }
-    .wrap { width: min(1080px, 92vw); margin: 0 auto; }
+    .wrap { width: min(1100px, 92vw); margin: 0 auto; }
 
-    /* Nav */
     header {
-      position: sticky; top: 0; z-index: 10;
-      backdrop-filter: blur(12px);
-      background: rgba(6, 18, 35, 0.85);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(6, 18, 35, 0.88);
+      border-bottom: 1px solid var(--line);
     }
     .nav {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 0; gap: 16px;
+      gap: 16px; padding: 12px 0;
     }
     .brand {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none; font-weight: 600; letter-spacing: 0.02em;
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; font-weight: 650;
     }
-    .brand img { width: 36px; height: 36px; border-radius: 50%; }
-    .nav-links { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+    .brand img { width: 34px; height: 34px; border-radius: 50%; }
+    .nav-links {
+      display: flex; flex-wrap: wrap; gap: 6px 14px;
+      align-items: center; justify-content: flex-end;
+    }
     .nav-links a {
-      text-decoration: none; color: var(--muted); font-size: 0.92rem;
+      text-decoration: none; color: var(--muted); font-size: 0.86rem;
     }
     .nav-links a:hover { color: var(--white); }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      text-decoration: none; border-radius: 999px; font-weight: 600;
-      padding: 12px 22px; font-size: 0.95rem;
-      transition: transform 0.15s ease, background 0.15s ease;
+      text-decoration: none; border-radius: 999px; font-weight: 650;
+      padding: 11px 20px; font-size: 0.92rem;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      border: 1px solid transparent;
     }
     .btn:hover { transform: translateY(-1px); }
-    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-primary { background: var(--accent); color: #fff; }
     .btn-primary:hover { background: #2563eb; }
     .btn-ghost {
-      border: 1px solid rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,.18);
       background: transparent; color: var(--light);
     }
+    .btn-sm { padding: 8px 14px; font-size: 0.84rem; }
 
-    /* Hero */
     .hero {
-      padding: 56px 0 40px;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 40px;
-      align-items: center;
-    }
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; padding-top: 36px; }
+      padding: 52px 0 44px;
+      display: grid; grid-template-columns: 1.05fr .95fr;
+      gap: 36px; align-items: center;
     }
     .eyebrow {
       color: var(--muted); text-transform: uppercase;
-      letter-spacing: 0.12em; font-size: 0.72rem; margin-bottom: 14px;
+      letter-spacing: .12em; font-size: .7rem; margin-bottom: 12px;
     }
     h1 {
       font-family: Cambria, Georgia, "Times New Roman", serif;
-      font-size: clamp(2.1rem, 4vw, 3.2rem);
-      line-height: 1.12; font-weight: 700; margin-bottom: 16px;
+      font-size: clamp(2.15rem, 4.2vw, 3.35rem);
+      line-height: 1.1; margin-bottom: 14px;
     }
     .lede {
-      color: #c5d0de; font-size: 1.08rem; max-width: 36ch; margin-bottom: 28px;
+      color: #c5d0de; font-size: 1.08rem; max-width: 38ch; margin-bottom: 24px;
     }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
-    .note { color: var(--muted); font-size: 0.82rem; max-width: 42ch; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .note { color: var(--muted); font-size: .82rem; max-width: 46ch; }
     .hero-visual {
       border-radius: 18px; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+      border: 1px solid var(--line);
+      box-shadow: 0 28px 80px rgba(0,0,0,.48);
     }
-    .hero-visual img { display: block; width: 100%; height: auto; }
 
-    /* Sections */
-    section { padding: 56px 0; }
-    section.alt { background: rgba(255,255,255,0.02); }
+    .trust {
+      padding: 18px 0 8px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .trust-row {
+      display: flex; flex-wrap: wrap; gap: 10px 22px;
+      justify-content: center; color: var(--muted); font-size: .86rem;
+      padding: 8px 0;
+    }
+    .trust-row strong { color: #d7e2ef; font-weight: 650; }
+
+    section { padding: 64px 0; }
+    section.alt { background: rgba(255,255,255,.025); }
     h2 {
       font-family: Cambria, Georgia, serif;
-      font-size: 1.75rem; margin-bottom: 10px;
+      font-size: clamp(1.55rem, 2.6vw, 2rem);
+      margin-bottom: 10px;
     }
-    .section-lead { color: var(--muted); margin-bottom: 28px; max-width: 48ch; }
+    .section-lead { color: var(--muted); margin-bottom: 28px; max-width: 52ch; }
 
-    .features {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
-    }
-    @media (max-width: 860px) {
-      .features { grid-template-columns: 1fr; }
-    }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
     .card {
-      background: rgba(11, 31, 58, 0.65);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--card);
+      border: 1px solid var(--line);
       border-radius: 16px; overflow: hidden;
     }
-    .card img { width: 100%; display: block; aspect-ratio: 16/10; object-fit: cover; }
+    .card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
     .card-body { padding: 16px 16px 18px; }
-    .card-body h3 { font-size: 1.05rem; margin-bottom: 6px; }
-    .card-body p { color: var(--muted); font-size: 0.9rem; }
+    .card-body h3, .tile h3, .step h3, .plan h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .card-body p, .tile p, .step p, .plan p { color: var(--muted); font-size: .9rem; }
 
-    .plans {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    .tile {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; padding: 18px;
     }
-    @media (max-width: 860px) {
-      .plans { grid-template-columns: 1fr; }
+    .tile .ico {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--accent-soft); color: #93c5fd;
+      display: grid; place-items: center; font-weight: 700;
+      margin-bottom: 12px; font-size: .85rem;
     }
+
+    .steps { counter-reset: step; }
+    .step {
+      position: relative;
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; padding: 18px 18px 18px 56px;
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute; left: 16px; top: 18px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: grid; place-items: center; font-size: .82rem; font-weight: 700;
+    }
+
+    table.compare {
+      width: 100%; border-collapse: collapse;
+      background: var(--card); border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .compare th, .compare td {
+      padding: 12px 14px; text-align: left;
+      border-bottom: 1px solid var(--line); font-size: .9rem;
+    }
+    .compare th { color: #dbe6f4; font-weight: 650; background: rgba(0,0,0,.18); }
+    .compare td { color: var(--muted); }
+    .compare td:first-child { color: #d5deed; }
+    .yes { color: #86efac; }
+    .soon { color: #fbbf24; }
+    .no { color: #64748b; }
+
     .plan {
       padding: 22px; border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(11, 31, 58, 0.5);
+      border: 1px solid var(--line); background: var(--card);
+      display: flex; flex-direction: column; gap: 10px;
     }
     .plan.featured {
-      border-color: rgba(59,130,246,0.55);
-      box-shadow: 0 0 0 1px rgba(59,130,246,0.2);
+      border-color: rgba(59,130,246,.55);
+      box-shadow: 0 0 0 1px rgba(59,130,246,.18);
     }
-    .plan .tag {
-      display: inline-block; font-size: 0.72rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    .tag {
+      display: inline-block; font-size: .7rem; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent);
     }
-    .plan h3 { margin-bottom: 8px; }
-    .plan p { color: var(--muted); font-size: 0.92rem; }
+    .plan ul { list-style: none; display: grid; gap: 8px; margin: 6px 0 12px; }
+    .plan li { color: #c2cddc; font-size: .9rem; padding-left: 18px; position: relative; }
+    .plan li::before { content: "✓"; position: absolute; left: 0; color: #86efac; }
+
+    .faq details {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 12px; padding: 14px 16px; margin-bottom: 10px;
+    }
+    .faq summary {
+      cursor: pointer; font-weight: 650; list-style: none;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq details[open] summary { margin-bottom: 8px; }
+    .faq p { color: var(--muted); font-size: .92rem; }
+
+    .cta-band {
+      text-align: center;
+      padding: 48px 22px;
+      border-radius: 20px;
+      background: linear-gradient(160deg, rgba(59,130,246,.18), rgba(11,31,58,.9));
+      border: 1px solid rgba(59,130,246,.28);
+    }
+    .cta-band h2 { margin-bottom: 8px; }
+    .cta-band p { color: var(--muted); margin: 0 auto 20px; max-width: 42ch; }
+    .cta-band .cta-row { justify-content: center; }
 
     .footer {
-      padding: 36px 0 48px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      color: var(--muted); font-size: 0.85rem;
+      padding: 40px 0 48px;
+      border-top: 1px solid var(--line);
+      color: var(--muted); font-size: .85rem;
     }
-    .footer-row {
-      display: flex; flex-wrap: wrap; gap: 16px 28px;
-      justify-content: space-between; align-items: start;
+    .footer-grid {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 24px;
     }
-    .footer a { color: #b7c5d8; text-decoration: none; }
+    .footer h4 { color: #d7e0ec; margin-bottom: 10px; font-size: .9rem; }
+    .footer a { text-decoration: none; display: block; margin-bottom: 6px; color: #b7c5d8; }
     .footer a:hover { text-decoration: underline; }
-    .footer nav { display: flex; flex-wrap: wrap; gap: 14px; }
+    .footer-bottom {
+      margin-top: 28px; padding-top: 16px;
+      border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 10px 18px;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .grid-2, .footer-grid { grid-template-columns: 1fr; }
+      .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .nav-links a:not(.btn) { display: none; }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap nav">
       <a class="brand" href="./">
-        <img src="assets/icon.png" alt="" width="36" height="36" />
+        <img src="assets/icon.png" width="34" height="34" alt="" />
         <span>Arya 900</span>
       </a>
-      <div class="nav-links">
-        <a href="#features">Product</a>
-        <a href="#plans">Plans</a>
-        <a href="legal/EULA.en.md">Legal</a>
-        <a class="btn btn-primary" href="https://github.com/andreibujaki/arya900/releases/latest">Download Free</a>
-      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#plans">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-primary btn-sm" href="https://github.com/andreibujaki/arya900/releases/latest">Download Free</a>
+      </nav>
     </div>
   </header>
 
   <main>
-    <div class="wrap hero">
+    <!-- HERO -->
+    <div class="wrap hero" id="top">
       <div>
-        <p class="eyebrow">Local Assistant · Windows</p>
+        <p class="eyebrow">Windows desktop · Local LLM</p>
         <h1>Private AI on your PC</h1>
         <p class="lede">
-          Offline desktop chat with local GGUF models. Free for personal light use —
-          no cloud required for everyday chat.
+          Arya 900 Local Assistant is offline desktop chat with local GGUF models.
+          Free for personal light use — your prompts stay on your machine.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://github.com/andreibujaki/arya900/releases/latest">Download Free for Windows</a>
-          <a class="btn btn-ghost" href="#features">See what’s included</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
         </div>
-        <p class="note">Windows 10/11 x64. Current build is unsigned — SmartScreen may ask you to confirm.</p>
+        <p class="note">Windows 10/11 x64. Current installer is unsigned — SmartScreen may ask you to confirm. Code signing comes later.</p>
       </div>
       <div class="hero-visual">
-        <img src="assets/hero.png" alt="Arya 900 Local Assistant" width="960" height="540" />
+        <img src="assets/hero.png" width="960" height="540" alt="Arya 900 Local Assistant" />
       </div>
     </div>
 
-    <section class="alt" id="features">
+    <!-- TRUST / HIGHLIGHTS -->
+    <div class="trust">
+      <div class="wrap trust-row">
+        <span><strong>Offline-first</strong> Free chat</span>
+        <span><strong>Local GGUF</strong> models</span>
+        <span><strong>Windows</strong> 10 / 11 x64</span>
+        <span><strong>EN + RO</strong> legal docs</span>
+        <span><strong>Pro / Business</strong> coming later</span>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section id="features">
       <div class="wrap">
-        <h2>Built for your machine</h2>
-        <p class="section-lead">Chat locally. Keep prompts and history on your PC with the Free experience.</p>
-        <div class="features">
+        <h2>Product features</h2>
+        <p class="section-lead">Everything you need for local assistant chat on Windows — without sending Free chats to a cloud vendor.</p>
+        <div class="grid-3" style="margin-bottom:18px">
           <article class="card">
             <img src="assets/feature-chat.png" alt="" />
             <div class="card-body">
@@ -210,40 +306,242 @@
           <article class="card">
             <img src="assets/feature-knowledge.png" alt="" />
             <div class="card-body">
-              <h3>Knowledge (Pro later)</h3>
-              <p>Folder-grounded tools unlock when Pro goes public.</p>
+              <h3>Knowledge tools</h3>
+              <p>Folder-grounded workflows unlock with Pro (coming later).</p>
             </div>
           </article>
           <article class="card">
             <img src="assets/feature-language.png" alt="" />
             <div class="card-body">
               <h3>Multilingual UI</h3>
-              <p>Use the app in your language; legal docs in EN and RO.</p>
+              <p>Use the app in your language; legal documents in English and Romanian.</p>
             </div>
           </article>
+        </div>
+        <div class="grid-4">
+          <div class="tile"><div class="ico">01</div><h3>Desktop native</h3><p>Windows installer — not a browser tab.</p></div>
+          <div class="tile"><div class="ico">02</div><h3>Model choice</h3><p>Use local GGUF files that fit your hardware.</p></div>
+          <div class="tile"><div class="ico">03</div><h3>Free forever*</h3><p>Personal light use under the Free EULA.</p></div>
+          <div class="tile"><div class="ico">04</div><h3>Upgrade path</h3><p>Pro and Business when you need more.</p></div>
         </div>
       </div>
     </section>
 
-    <section id="plans">
+    <!-- USE CASES -->
+    <section class="alt" id="usecases">
       <div class="wrap">
-        <h2>Plans</h2>
-        <p class="section-lead">Start Free today. Paid tiers come later.</p>
-        <div class="plans">
+        <h2>Made for real work on your desk</h2>
+        <p class="section-lead">Typical Free uses — without uploading your day-to-day chats.</p>
+        <div class="grid-3">
+          <div class="tile"><h3>Draft &amp; rewrite</h3><p>Emails, notes, and short documents with a local model.</p></div>
+          <div class="tile"><h3>Learn offline</h3><p>Explain concepts when travel or network is limited.</p></div>
+          <div class="tile"><h3>Private brainstorm</h3><p>Ideas that never need to leave your PC for Free chat.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <p class="section-lead">From download to first reply in a few steps.</p>
+        <div class="grid-2 steps">
+          <div class="step"><h3>Install Free</h3><p>Download the Windows x64 installer from GitHub Releases and complete setup.</p></div>
+          <div class="step"><h3>Add a GGUF model</h3><p>Choose or place a local model your machine can run.</p></div>
+          <div class="step"><h3>Chat offline</h3><p>Start a conversation — Free chat is designed for on-device use.</p></div>
+          <div class="step"><h3>Upgrade later</h3><p>When Pro or Business ships, unlock Knowledge tools or org use.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIVACY / SECURITY -->
+    <section class="alt" id="privacy">
+      <div class="wrap">
+        <h2>Privacy &amp; local-first</h2>
+        <p class="section-lead">Built so Free everyday chat does not depend on a hosted AI API.</p>
+        <div class="grid-3">
+          <div class="tile"><h3>On your disk</h3><p>Chats, settings, and models live in your Windows user data.</p></div>
+          <div class="tile"><h3>Optional network</h3><p>Checkout or license checks only when you use those flows.</p></div>
+          <div class="tile"><h3>Clear terms</h3><p>Read the <a href="legal/PRIVACY.en.md">Privacy notice</a> and <a href="legal/EULA.en.md">EULA</a>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REQUIREMENTS -->
+    <section id="requirements">
+      <div class="wrap">
+        <h2>System requirements</h2>
+        <p class="section-lead">Designed for mainstream Windows PCs.</p>
+        <div class="grid-2">
+          <div class="tile">
+            <h3>Supported</h3>
+            <p>Windows 10 or 11, <strong style="color:#d7e2ef">x64</strong>. Several GB free for the app and models.</p>
+          </div>
+          <div class="tile">
+            <h3>Hardware</h3>
+            <p>8 GB RAM minimum (16 GB+ for larger GGUFs). CPU always works; NVIDIA GPU optional for speed.</p>
+          </div>
+        </div>
+        <p style="margin-top:14px"><a href="docs/requirements.md">Full requirements →</a> · <a href="docs/install.md">Install help →</a></p>
+      </div>
+    </section>
+
+    <!-- PRICING / PLANS -->
+    <section class="alt" id="plans">
+      <div class="wrap">
+        <h2>Pricing &amp; plans</h2>
+        <p class="section-lead">Start Free now. Paid tiers will open later with checkout in-app.</p>
+        <div class="grid-3">
           <div class="plan featured">
             <span class="tag">Available now</span>
             <h3>Free</h3>
-            <p>Personal, non-commercial light use. Local chat on Windows.</p>
+            <p>Personal, non-commercial light use.</p>
+            <ul>
+              <li>Local GGUF chat</li>
+              <li>Windows desktop app</li>
+              <li>No paid subscription required</li>
+            </ul>
+            <a class="btn btn-primary" href="https://github.com/andreibujaki/arya900/releases/latest">Download Free</a>
           </div>
           <div class="plan">
             <span class="tag">Coming later</span>
             <h3>Pro</h3>
-            <p>Knowledge folder and file tools for power users.</p>
+            <p>For power users who need files &amp; Knowledge.</p>
+            <ul>
+              <li>Knowledge folder</li>
+              <li>File / knowledge tools</li>
+              <li>Paid entitlement</li>
+            </ul>
+            <a class="btn btn-ghost" href="#compare">See comparison</a>
           </div>
           <div class="plan">
             <span class="tag">Coming later</span>
             <h3>Business</h3>
-            <p>Organizational use and Project edition when ready.</p>
+            <p>For organizations and Project workflows.</p>
+            <ul>
+              <li>Commercial / org use</li>
+              <li>Project edition (when ready)</li>
+              <li>Manual / sales keys</li>
+            </ul>
+            <a class="btn btn-ghost" href="legal/SUBSCRIPTION.en.md">Subscription terms</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARE -->
+    <section id="compare">
+      <div class="wrap">
+        <h2>Compare plans</h2>
+        <p class="section-lead">High-level matrix — details in the EULA and Subscription terms.</p>
+        <div style="overflow-x:auto">
+          <table class="compare">
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th>Free</th>
+                <th>Pro</th>
+                <th>Business</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Local GGUF chat</td>
+                <td class="yes">Yes</td>
+                <td class="yes">Yes</td>
+                <td class="yes">Yes</td>
+              </tr>
+              <tr>
+                <td>Personal light use</td>
+                <td class="yes">Yes</td>
+                <td class="yes">Yes</td>
+                <td class="yes">Yes</td>
+              </tr>
+              <tr>
+                <td>Knowledge folder &amp; file tools</td>
+                <td class="no">—</td>
+                <td class="soon">Later</td>
+                <td class="soon">Later</td>
+              </tr>
+              <tr>
+                <td>Commercial / org use</td>
+                <td class="no">—</td>
+                <td class="soon">Later</td>
+                <td class="soon">Later</td>
+              </tr>
+              <tr>
+                <td>Arya Project edition</td>
+                <td class="no">—</td>
+                <td class="no">—</td>
+                <td class="soon">Later</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="alt" id="faq">
+      <div class="wrap">
+        <h2>FAQ</h2>
+        <p class="section-lead">Short answers — more in <a href="docs/faq.md">docs/faq.md</a>.</p>
+        <div class="faq">
+          <details open>
+            <summary>Is Arya 900 open source?</summary>
+            <p>No. The product is proprietary. This site and GitHub repo publish downloads and legal text only — not application source.</p>
+          </details>
+          <details>
+            <summary>Is Free really free?</summary>
+            <p>Free is for personal, non-commercial light use under the EULA. Commercial or organizational use needs Pro or Business when those tiers are available.</p>
+          </details>
+          <details>
+            <summary>Why does Windows warn me?</summary>
+            <p>The current Free installer is not code-signed. SmartScreen or company policy may warn or block it until a signed build ships.</p>
+          </details>
+          <details>
+            <summary>Can I activate Pro inside the Free installer?</summary>
+            <p>No. The Free build is Free-only. A full Pro-capable installer will ship when Pro goes public.</p>
+          </details>
+          <details>
+            <summary>Do my chats leave my PC?</summary>
+            <p>For normal Free use, chat is designed to stay on-device. Checkout or license validation may use the network when you use those features. See the Privacy notice.</p>
+          </details>
+          <details>
+            <summary>Where do I get support?</summary>
+            <p>Use GitHub Issues for bugs, or the release page for version questions. Contact details appear in the Privacy notice.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+        <h2>About the publisher</h2>
+        <p class="section-lead">Arya 900 Local Assistant is published by <strong style="color:#d7e2ef">EAROCO SERVICES SRL - ANDREI BUJAKI</strong>.</p>
+        <div class="grid-2">
+          <div class="tile">
+            <h3>Product focus</h3>
+            <p>A practical Windows local assistant — Free first, paid unlocks later.</p>
+          </div>
+          <div class="tile">
+            <h3>Source policy</h3>
+            <p>Application source is private. Public GitHub hosts the site, legal docs, and Free downloads.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section>
+      <div class="wrap">
+        <div class="cta-band" id="download">
+          <h2>Get Free for Windows</h2>
+          <p>Install Arya 900 Local Assistant and run local GGUF chat on your PC.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://github.com/andreibujaki/arya900/releases/latest">Download Free</a>
+            <a class="btn btn-ghost" href="docs/install.md">Installation guide</a>
           </div>
         </div>
       </div>
@@ -251,20 +549,39 @@
   </main>
 
   <footer class="footer">
-    <div class="wrap footer-row">
-      <div>
-        <strong style="color:#d7e0ec">Arya 900 Local Assistant</strong><br />
-        © EAROCO SERVICES SRL - ANDREI BUJAKI<br />
-        Proprietary software — not open source.
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h4>Arya 900 Local Assistant</h4>
+          <p>Private AI on your PC.<br />© EAROCO SERVICES SRL - ANDREI BUJAKI</p>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#plans">Pricing</a>
+          <a href="#compare">Compare</a>
+          <a href="https://github.com/andreibujaki/arya900/releases/latest">Download</a>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <a href="docs/install.md">Install</a>
+          <a href="docs/requirements.md">Requirements</a>
+          <a href="docs/faq.md">FAQ</a>
+          <a href="docs/changelog.md">Changelog</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="legal/EULA.en.md">EULA (EN)</a>
+          <a href="legal/EULA.ro.md">EULA (RO)</a>
+          <a href="legal/PRIVACY.en.md">Privacy</a>
+          <a href="legal/SUBSCRIPTION.en.md">Subscription</a>
+          <a href="LICENSE">License notice</a>
+        </div>
       </div>
-      <nav>
-        <a href="https://github.com/andreibujaki/arya900/releases/latest">Download</a>
-        <a href="docs/install.md">Install help</a>
-        <a href="docs/faq.md">FAQ</a>
-        <a href="legal/EULA.en.md">EULA</a>
-        <a href="legal/PRIVACY.en.md">Privacy</a>
-        <a href="https://github.com/andreibujaki/arya900">GitHub</a>
-      </nav>
+      <div class="footer-bottom">
+        <span>Proprietary software — not open source.</span>
+        <span><a href="https://github.com/andreibujaki/arya900">GitHub repository</a></span>
+      </div>
     </div>
   </footer>
 </body>
