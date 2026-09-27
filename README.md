@@ -1,12 +1,12 @@
 # Arya 900 Local Assistant
 
-**Private AI on your PC** — offline Windows chat with local GGUF models.
-
 <p align="center">
-  <a href="https://andreibujaki.github.io/arya900/">
-    <img src="assets/hero.png" alt="Arya 900 Local Assistant" width="920" />
-  </a>
+  <img src="assets/icon.png" alt="Arya 900" width="96" />
 </p>
+
+<h1 align="center">Arya 900</h1>
+<p align="center"><strong>Local Assistant</strong></p>
+<p align="center">Private AI on your PC</p>
 
 <p align="center">
   <a href="https://andreibujaki.github.io/arya900/"><strong>Product website</strong></a>
@@ -14,7 +14,7 @@
   <a href="https://github.com/andreibujaki/arya900/releases/latest"><strong>Download Free (Windows)</strong></a>
 </p>
 
-Full site sections: Features · Use cases · How it works · Privacy · Requirements · Pricing · Compare · FAQ · About · Download
+---
 
 Windows 10/11 · x64 · Free for personal light use · [Install](docs/install.md) · [FAQ](docs/faq.md) · [Legal](legal/EULA.en.md)
 
