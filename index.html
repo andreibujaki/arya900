@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
-  <meta name="arya-build" content="feature-guides-2026-09-27b" />
+  <meta name="arya-build" content="feature-guides-2026-09-27c" />
   <title>Arya 900 Local Assistant — Private AI on your PC</title>
   <meta name="description" content="Offline Windows desktop chat with local GGUF models. Free for personal light use." />
   <meta property="og:title" content="Arya 900 Local Assistant" />
@@ -199,6 +199,46 @@
       aspect-ratio: 16 / 10;
       object-fit: cover;
       object-position: top center;
+      cursor: zoom-in;
+      display: block;
+    }
+    .guide-shot img:hover { opacity: 0.92; }
+    .guide-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(6, 18, 35, 0.88);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      cursor: zoom-out;
+    }
+    .guide-lightbox.open { display: flex; }
+    .guide-lightbox img {
+      max-width: min(96vw, 1200px);
+      max-height: 92vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+      cursor: default;
+      background: #fff;
+    }
+    .guide-lightbox-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      border: none;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 650;
+      font-size: 0.9rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
     }
     .guide-shot figcaption {
       padding: 8px 10px;
@@ -800,6 +840,10 @@
       </div>
     </div>
   </footer>
+  <div class="guide-lightbox" id="guide-lightbox" hidden aria-modal="true" role="dialog" aria-label="Screenshot">
+    <button type="button" class="guide-lightbox-close" id="guide-lightbox-close">Close</button>
+    <img id="guide-lightbox-img" alt="" />
+  </div>
   <script>
     (function () {
       var root = document.getElementById("feature-guides");
@@ -851,6 +895,37 @@
       });
       window.addEventListener("hashchange", fromHash);
       fromHash();
+
+      /* Click screenshot to enlarge */
+      var lb = document.getElementById("guide-lightbox");
+      var lbImg = document.getElementById("guide-lightbox-img");
+      var lbClose = document.getElementById("guide-lightbox-close");
+      function openLb(src, alt) {
+        lbImg.src = src;
+        lbImg.alt = alt || "";
+        lb.hidden = false;
+        lb.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeLb() {
+        lb.classList.remove("open");
+        lb.hidden = true;
+        lbImg.removeAttribute("src");
+        document.body.style.overflow = "";
+      }
+      root.addEventListener("click", function (e) {
+        var img = e.target.closest(".guide-shot img");
+        if (!img) return;
+        e.preventDefault();
+        openLb(img.currentSrc || img.src, img.alt);
+      });
+      lb.addEventListener("click", function (e) {
+        if (e.target === lb || e.target === lbClose) closeLb();
+      });
+      lbClose.addEventListener("click", closeLb);
+      window.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && lb.classList.contains("open")) closeLb();
+      });
     })();
   </script>
 </body>
