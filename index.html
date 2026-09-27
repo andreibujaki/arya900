@@ -79,9 +79,11 @@
       border-bottom: 1px solid var(--line);
     }
     .hero-splash {
-      width: min(420px, 88vw);
+      width: min(560px, 92vw);
       margin: 0 auto 28px;
-      border-radius: 12px;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
     }
     .cta-row {
       display: flex; flex-wrap: wrap; gap: 10px;
@@ -119,7 +121,7 @@
       border-radius: 12px;
     }
     .card { overflow: hidden; }
-    .card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--soft); }
+    .card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: #F5F7FA; }
     .card-body, .tile, .plan { padding: 16px; }
     .card-body h3, .tile h3, .step h3, .plan h3 {
       font-size: 1.02rem; margin-bottom: 6px; color: var(--ink);
