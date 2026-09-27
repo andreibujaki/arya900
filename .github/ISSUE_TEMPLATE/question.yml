@@ -1,0 +1,12 @@
+name: Question / feedback
+description: Ask about Free use or product direction (not a bug)
+title: "[Question] "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: For downloads, prefer Releases. For legal text, see the legal/ folder.
+    validations:
+      required: true
