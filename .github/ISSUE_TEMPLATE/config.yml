@@ -1,5 +1,7 @@
 blank_issues_enabled: false
-contact_links:
+  - name: Media & brand kit
+    url: https://github.com/andreibujaki/arya900/tree/main/brand
+    about: Logos, social images, store frames, and brand sheet.
   - name: Download Free
     url: https://github.com/andreibujaki/arya900/releases/latest
     about: Get the Free Windows installer from Releases (not Issues).
